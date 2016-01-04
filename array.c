@@ -118,7 +118,7 @@ void memswap(void *x, void *y, size_t size) {
 
 void rotate_left_and_carry(void *x, void *y, size_t size) {
     typedef unsigned char array[size];
-        for (array *t = x; x < y; x = ++t) {
+    for (array *t = x; x < y; x = ++t) {
         memswap(x, t+1, size);
     }
 }
