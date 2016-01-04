@@ -9,6 +9,7 @@ struct insertion_cursor { void     *value;
                           comparer *compare; };
                           
 void  memswap(void *, void *, size_t);
+void  rotate_left_and_carry(void *, void *, size_t);
 void  rotate_right_and_carry(void *, void *, size_t);
 int   insertion_compare(void const *, void const *y);
 void *push_back(void **, void const *, size_t *, size_t);

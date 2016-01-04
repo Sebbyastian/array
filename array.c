@@ -67,6 +67,18 @@ int main(void) {
     find_and_delete(ptr, (array) { "hello" }, &size, sizeof (array), casecmp);
     inserted = insert_or_replace(&ptr, (array) { "hello" }, &size, sizeof (array), casecmp);
     assert(find(ptr, (array) { "hello" }, size, sizeof (array), casecmp) == inserted);
+    
+    array first, last;
+    strncpy(first, array_ptr[0], sizeof (array));
+    strncpy(last,  array_ptr[3], sizeof (array));
+
+    puts("rotate right and carry...");
+    rotate_right_and_carry(array_ptr, array_ptr + 3, sizeof *array_ptr);
+    assert(strncmp(last, array_ptr[0], sizeof (array)) == 0);
+
+    puts("rotate left and carry...");
+    rotate_left_and_carry(array_ptr, array_ptr + 3, sizeof *array_ptr);
+    assert(strncmp(first, array_ptr[0], sizeof (array)) == 0);
 
     puts("Tests completed... :)");
     for (size_t x = 0; x < size; x++) {
@@ -104,9 +116,16 @@ void memswap(void *x, void *y, size_t size) {
     }
 }
 
+void rotate_left_and_carry(void *x, void *y, size_t size) {
+    typedef unsigned char array[size];
+        for (array *t = x; x < y; x = ++t) {
+        memswap(x, t+1, size);
+    }
+}
+
 void rotate_right_and_carry(void *x, void *y, size_t size) {
     typedef unsigned char array[size];
-    for (array *t = x; t != y; x = ++t) {
+    for (array *t = x; x < y; x = ++t) {
         memswap(x, y, size);
     }
 }
